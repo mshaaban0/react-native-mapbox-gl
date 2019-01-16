@@ -27,6 +27,7 @@ import config from './utils/config';
 import ShowMap from './components/ShowMap';
 import SetPitch from './components/SetPitch';
 import SetBearing from './components/SetBearing';
+import SearchByCoords from './components/SearchByCoords';
 import ShowClick from './components/ShowClick';
 import FlyTo from './components/FlyTo';
 import FitBounds from './components/FitBounds';
@@ -103,6 +104,7 @@ const Examples = [
   new ExampleItem('Show Map', ShowMap),
   new ExampleItem('Set Pitch', SetPitch),
   new ExampleItem('Set Bearing', SetBearing),
+  new ExampleItem('Search By Coordinates', SearchByCoords),
   new ExampleItem('Show Click', ShowClick),
   new ExampleItem('Fly To', FlyTo),
   new ExampleItem('Fit Bounds', FitBounds),
