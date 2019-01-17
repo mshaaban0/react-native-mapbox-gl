@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   TouchableWithoutFeedback,
@@ -6,7 +6,6 @@ import {
   Text,
   Image,
   StyleSheet,
-  Alert,
 } from 'react-native';
 
 import colors from '../../styles/colors';
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
   },
 })
 
-class Switcher extends Component {
+class Switcher extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

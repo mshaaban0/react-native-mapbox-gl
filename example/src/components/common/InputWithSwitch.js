@@ -53,7 +53,7 @@ const InputWithSwitch = (props) => {
     smallInputProps,
     largeInputProps,
     title,
-    icon
+    icon,
   } = props;
 
   return (

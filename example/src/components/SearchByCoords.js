@@ -6,7 +6,6 @@ import {
   TextInput,
   StyleSheet,
   KeyboardAvoidingView,
-  Alert
 } from 'react-native';
 import Page from './common/Page';
 import InputWithSwitch from './common/InputWithSwitch';
@@ -43,11 +42,6 @@ class SearchByCoords extends React.Component {
       zoomLevel: 4
     }
 
-    this.onPress = this.onPress.bind(this);
-  }
-
-  onPress(event) {
-    Alert('Pressed');
   }
 
   render() {
@@ -58,7 +52,6 @@ class SearchByCoords extends React.Component {
             <MapboxGL.MapView
               centerCoordinate={DEFAULT_CENTER_COORDINATE}
               style={sheet.matchParent}
-              onPress={this.onPress}
             />
           </View>
           <View style={styles.fieldsWrapper} shadowColor='rgba(0, 0, 0, 1)' >
