@@ -39,17 +39,20 @@ class Switcher extends Component {
     super(props);
     this.state = {
       currentIndex: props.preSelectedIndex,
+      currentValue: props.switchValues[props.preSelectedIndex],
     }
 
     this.onPress = this.onPress.bind(this);
   }
 
-  onPress(currentIndex, values) {
+  onPress() {
+    const newIndex = this.state.currentIndex === 0 ? 1 : 0;
+    const newValue = this.props.switchValues[newIndex];
     this.setState({
-      currentIndex
+      currentIndex: newIndex,
+      currentValue: newValue,
     }, () => {
-      const currentValue = values[this.state.currentIndex];
-      this.props.onChange(currentValue);
+      this.props.onChange(newValue);
     })
   }
 
@@ -59,10 +62,10 @@ class Switcher extends Component {
       switchValues,
       preSelectedIndex,
     } = this.props;
-    const { currentIndex } = this.state;
+    const { currentIndex, currentValue } = this.state;
     return(
       <TouchableWithoutFeedback
-        onPress={this.onPress(currentIndex, switchValues)}>
+        onPress={this.onPress}>
         <View style={styles.switchWrapper}>
           {icon &&
             <View style={styles.iconWrapper}>
@@ -71,7 +74,7 @@ class Switcher extends Component {
           }
           <View style={sheet.matchParent}>
             <Text style={styles.switchButtonText}>
-              { switchValues[currentIndex] }
+              {currentValue}
             </Text>
           </View>
         </View>

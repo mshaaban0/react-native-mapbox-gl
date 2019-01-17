@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     height: 50,
     fontSize: 36,
     paddingTop: 10,
-    paddingBottom: 2,
+    paddingBottom: 3,
   },
   smallInputField: {
     textAlign: 'center'
