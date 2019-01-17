@@ -1,24 +1,34 @@
 import React from 'react';
 import MapboxGL from '@mapbox/react-native-mapbox-gl';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Alert
+} from 'react-native';
 import Page from './common/Page';
 import InputWithSwitch from './common/InputWithSwitch';
 import BaseExamplePropTypes from './common/BaseExamplePropTypes';
 
 import sheet from '../styles/sheet';
+import colors from '../styles/colors';
+import { DEFAULT_CENTER_COORDINATE } from '../utils';
+
+const HorizontalIcon = require('../assets/coords_horizontal.png');
+const VerticalIcon = require('../assets/coords_vertical.png');
 
 const styles = StyleSheet.create({
-  welcome: {
-    color: 'red'
+  mainWrapper: {
+    backgroundColor: colors.secondary.white,
+  },
+  mapWrapper: {
+    flex: 1,
   },
   fieldsWrapper: {
-    flex: 1,
-    backgroundColor: 'white',
-    flexDirection: 'column'
+    height: 150,
   },
-  fillRow: {
-    flex: 1
-  }
 });
 
 class SearchByCoords extends React.Component {
@@ -30,22 +40,40 @@ class SearchByCoords extends React.Component {
     super(props);
 
     this.state = {
-      welcome: 'Welcome to the jungle'
+      zoomLevel: 4
     }
+
+    this.onPress = this.onPress.bind(this);
+  }
+
+  onPress(event) {
+    Alert('Pressed');
   }
 
   render() {
-    const { welcome } = this.state;
     return(
       <Page {...this.props}>
-        <View style={styles.fieldsWrapper}>
-          <View style={styles.fillRow}>
-            <InputWithSwitch title='S' />
+        <KeyboardAvoidingView style={[styles.mainWrapper, sheet.matchParent]} behavior="padding" enabled>
+          <View style={sheet.matchParent}>
+            <MapboxGL.MapView
+              centerCoordinate={DEFAULT_CENTER_COORDINATE}
+              style={sheet.matchParent}
+              onPress={this.onPress}
+            />
           </View>
-          <View style={styles.fillRow}>
-            <InputWithSwitch title='W' />
+          <View style={styles.fieldsWrapper} shadowColor='rgba(0, 0, 0, 1)' >
+            <View style={sheet.matchParent}>
+              <InputWithSwitch
+                switchValues={['N', 'S']}
+                icon={VerticalIcon} />
+            </View>
+            <View style={sheet.matchParent}>
+              <InputWithSwitch
+                switchValues={['E', 'W']}
+                icon={HorizontalIcon} />
+            </View>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Page>
     )
   }

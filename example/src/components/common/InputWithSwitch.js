@@ -1,88 +1,99 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, TextInput, StyleSheet, TouchableWithoutFeedback, Text } from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Text,
+  Image
+} from 'react-native';
 import colors from '../../styles/colors';
+import sheet from '../../styles/sheet';
+import Switcher from './Switcher';
 
 const styles = StyleSheet.create({
   groupWrapper: {
-    flex: 1,
     flexDirection: 'row',
-    flexWrap: 'nowrap'
-  },
-  switchWrapper: {
-    height: 40,
-    width: 70,
-  },
-  switchButton: {
-    height: 40,
-    width: 70,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'right',
-    fontSize: 36,
-    paddingLeft: 5,
-    paddingRight: 5,
+    flexWrap: 'nowrap',
+    // Interaction Seperator
+    paddingBottom: 10,
+    paddingRight: 10,
   },
   smallInputWrapper: {
     width: 80,
   },
   seperator: {
-    width: 10,
-    height: 40,
-    color: colors.secondary.black,
+    width: 22,
+    height: 55,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  largeInputWrapper: {
-    flex: 1,
+  seperatorText: {
+    color: colors.primary.grayDark,
+    fontSize: 36,
   },
   inputField: {
     borderBottomWidth: 1,
-    borderBottomColor: colors.primary.gray,
-    height: 40,
+    borderBottomColor: colors.primary.grayDark,
+    height: 50,
     fontSize: 36,
-    paddingRight: 5,
-    paddingLeft: 5,
-    textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 2,
+  },
+  smallInputField: {
+    textAlign: 'center'
   },
 });
 
-const InputWithSwitch = ({smallInputProps, largeInputProps, title}) => {
+const InputWithSwitch = (props) => {
+  const {
+    switchValues,
+    smallInputProps,
+    largeInputProps,
+    title,
+    icon
+  } = props;
+
   return (
-    <View style={styles.groupWrapper}>
-      <TouchableWithoutFeedback
-        onPress={() => alert('Hello Input')}>
-        <Text style={styles.switchButton}>{title}</Text>
-      </TouchableWithoutFeedback>
+    <View style={[sheet.matchParent, styles.groupWrapper]}>
+      <Switcher icon={icon} switchValues={switchValues} />
+
       <View style={styles.smallInputWrapper}>
         <TextInput
-          style={styles.inputField}
+          style={[styles.inputField, styles.smallInputField]}
           {...smallInputProps} />
       </View>
+
       <View style={styles.seperator}>
-        <Text>,</Text>
+        <Text style={styles.seperatorText}>,</Text>
       </View>
-      <View style={styles.largeInputWrapper}>
+
+      <View style={sheet.matchParent}>
         <TextInput
           style={styles.inputField}
-          {...smallInputProps} />
+          {...largeInputProps} />
       </View>
     </View>
   )
 };
 
+const commonInputProps = {
+  placeholder: '',
+  focusOnMount: false,
+  keyboardType: 'number-pad',
+  keyboardAppearance: 'dark',
+}
+
 InputWithSwitch.defaultProps = {
   smallInputProps: {
-    placeholder: '',
-    focusOnMount: false,
-    keyboardType: 'number-pad',
+    ...commonInputProps,
+    maxLength: 3,
   },
   largeInputProps: {
-    placeholder: '',
-    focusOnMount: false,
-    keyboardType: 'number-pad',
+    ...commonInputProps,
+    maxLength: 10
   },
 }
 
